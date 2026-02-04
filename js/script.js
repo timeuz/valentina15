@@ -1,7 +1,7 @@
 //  CONF
 const DADOS = {
     meta: 4500.00,
-    arrecadado: 500.00,
+    arrecadado: 1000.00,
     dataNiver: '2026-02-15',
     chavePix: '00020126360014br.gov.bcb.pix0114+55799913264715204000053039865802BR5917Timeu F. Oliveira6009Sao Paulo62220518daqr7948329803383163042E72'
 };
