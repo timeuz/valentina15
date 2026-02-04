@@ -6,11 +6,10 @@
     <title>15zão da Valentina</title>
     <style>
         :root {
-            --primary: #FF0080; /* Pink vibrante */
-            --secondary: #7928CA; /* Roxo moderno */
+            --primary: #FF0080;
+            --secondary: #7928CA;
             --gradient: linear-gradient(135deg, #FF0080 0%, #7928CA 100%);
             
-            /* TEMA DARK COMFORT (Cinema) */
             --bg-page-start: #0f172a; 
             --bg-page-end: #1e1b4b;   
             
@@ -39,29 +38,25 @@
             box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5); 
             text-align: center;
             position: relative;
-            /* --- CORREÇÃO AQUI --- */
-            overflow: hidden; /* Garante que a borda do topo fique perfeita nas curvas */
+            overflow: hidden;
             border: 1px solid rgba(255,255,255,0.1);
         }
 
-        /* Topo decorativo */
         .card::before {
             content: '';
             position: absolute;
             top: 0; left: 0; right: 0;
-            height: 8px; /* Um pouco mais grossa para destacar */
+            height: 8px;
             background: var(--gradient);
         }
 
-        /* Moldura da Foto do Produto */
         .product-frame {
-            width: 160px; /* Um pouco maior */
+            width: 160px;
             height: 160px;
-            /* --- CORREÇÃO AQUI --- */
-            margin: 10px auto 25px; /* Margem positiva para ficar dentro do card */
+            margin: 10px auto 25px;
             background: white; 
             border-radius: 50%; 
-            padding: 20px; /* Mais respiro interno */
+            padding: 20px;
             box-shadow: 0 10px 25px rgba(0,0,0,0.08); 
             position: relative;
             z-index: 10;
@@ -101,7 +96,6 @@
             box-shadow: 0 4px 6px rgba(254, 226, 226, 0.5);
         }
 
-        /* Barra de Progresso */
         .progress-container {
             margin: 30px 0;
             text-align: left;
@@ -140,7 +134,6 @@
             animation: shimmer 2s infinite;
         }
 
-        /* Área do QR Code */
         .pix-box {
             background: #F9FAFB;
             border: 2px dashed #E5E7EB;
@@ -264,37 +257,28 @@
     </div>
 
     <script>
-        // ==========================================
-        //  ⚙️ CONFIGURAÇÃO DA FAMÍLIA
-        // ==========================================
+        //  CONF
         const DADOS = {
             meta: 4500.00,        
-            arrecadado: 0.00,  // <--- ATUALIZE AQUI
+            arrecadado: 0.00,
             dataNiver: '2026-02-15',
-            chavePix: '00020126580014BR.GOV.BCB.PIX...' // <--- COLE SUA CHAVE PIX GIGANTE AQUI
+            chavePix: '00020126360014br.gov.bcb.pix0114+55799913264715204000053039865802BR5917Timeu F. Oliveira6009Sao Paulo62220518daqr7948329803383163042E72'
         };
 
-        // ==========================================
         //  LÓGICA
-        // ==========================================
         function init() {
-            // Formata dinheiro
             const toMoney = v => v.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
             
-            // 1. Configura datas (Zera horas para comparar apenas os dias)
             const hoje = new Date();
             hoje.setHours(0, 0, 0, 0);
             
-            // Cria a data do niver garantindo fuso horário local (evita bug de virada de dia)
             const partesData = DADOS.dataNiver.split('-');
             const niver = new Date(partesData[0], partesData[1] - 1, partesData[2]);
             
-            // 2. Cálculos
             const pct = Math.min((DADOS.arrecadado / DADOS.meta) * 100, 100);
             const diffTime = niver - hoje;
             const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); 
 
-            // 3. Define a mensagem do topo (Lógica inteligente)
             let msgTopo = "";
             if (diffDays > 0) {
                 msgTopo = `⏳ Faltam ${diffDays} dias`;
@@ -304,14 +288,12 @@
                 msgTopo = `🥳 O prazo encerrou!`;
             }
 
-            // Atualiza tela
             document.getElementById('val-current').innerText = toMoney(DADOS.arrecadado);
             document.getElementById('val-goal').innerText = toMoney(DADOS.meta);
             document.getElementById('percent-text').innerText = Math.floor(pct) + '%';
-            document.getElementById('countdown-badge').innerText = msgTopo; // <--- Texto dinâmico
+            document.getElementById('countdown-badge').innerText = msgTopo;
             document.getElementById('pix-raw').innerText = DADOS.chavePix;
 
-            // Anima barra
             setTimeout(() => {
                 document.getElementById('fill').style.width = pct + '%';
             }, 200);
@@ -321,7 +303,7 @@
                 const btn = document.querySelector('.btn-action');
                 const originalText = btn.innerHTML;
                 
-                btn.style.background = '#10B981'; // Verde sucesso
+                btn.style.background = '#10B981';
                 btn.innerHTML = '<span>✅ Copiado!</span>';
                 
                 setTimeout(() => {
